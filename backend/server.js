@@ -16,6 +16,11 @@ const app = express();
 app.use(cors()); // Allow cross-origin requests (frontend <-> backend)
 app.use(express.json()); // Parse JSON requests
 
+// Health check route
+app.get("/", (req, res) => {
+  res.send("🚀 API is working fine!");
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
@@ -29,4 +34,3 @@ mongoose
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch((err) => console.error("❌ MongoDB connection error:", err));
-
