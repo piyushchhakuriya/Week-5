@@ -20,12 +20,13 @@ app.use(express.json()); // Parse JSON requests
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 
-
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/bookLibrary")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected successfully");
-    app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch((err) => console.error("❌ MongoDB connection error:", err));
+
